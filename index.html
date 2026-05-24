@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>SaleForce Pro | Sales Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<div class="sales-app">
+    <div class="sales-container">
+        <header class="sales-header">
+            <div class="logo-area">
+                <i class="fas fa-chart-line"></i>
+                <h1>SaleForce<span>Pro</span></h1>
+            </div>
+            <div class="header-stats">
+                <div class="stat-card-mini">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span id="totalRevenue">$0</span>
+                </div>
+                <div class="stat-card-mini">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="totalSales">0</span>
+                </div>
+                <div class="stat-card-mini">
+                    <i class="fas fa-users"></i>
+                    <span id="totalCustomers">0</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="card sales-entry-panel">
+                <div class="card-title">
+                    <i class="fas fa-cart-plus"></i>
+                    <h2>New Sale</h2>
+                </div>
+                <form id="saleForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Customer Name *</label>
+                            <input type="text" id="customerName" required placeholder="Enter customer name">
+                        </div>
+                        <div class="form-group">
+                            <label>Product *</label>
+                            <select id="productSelect" required>
+                                <option value="">Select product</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Quantity *</label>
+                            <input type="number" id="quantity" min="1" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Unit Price ($)</label>
+                            <input type="number" id="unitPrice" step="0.01" readonly placeholder="Auto-filled">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Discount (%)</label>
+                            <input type="number" id="discount" min="0" max="100" value="0" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Amount</label>
+                            <input type="text" id="totalAmount" readonly placeholder="$0.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <select id="paymentMethod">
+                            <option value="Cash">Cash</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Debit Card">Debit Card</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-sale-btn"><i class="fas fa-check-circle"></i> Record Sale</button>
+                </form>
+            </div>
+
+            <div class="card product-panel">
+                <div class="card-title">
+                    <i class="fas fa-boxes"></i>
+                    <h2>Product Inventory</h2>
+                    <button id="addProductBtn" class="small-action"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div class="product-list" id="productList">
+                    <div class="empty-state">Loading products...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card recent-sales-panel">
+            <div class="card-title">
+                <i class="fas fa-history"></i>
+                <h2>Recent Transactions</h2>
+                <button id="resetSalesBtn" class="small-action danger"><i class="fas fa-trash-alt"></i> Reset All</button>
+            </div>
+            <div class="sales-table-container">
+                <table class="sales-table" id="salesTable">
+                    <thead>
+                        <tr><th>ID</th><th>Customer</th><th>Product</th><th>Qty</th><th>Amount</th><th>Date</th><th>Status</th></tr>
+                    </thead>
+                    <tbody id="salesTableBody">
+                        <tr><td colspan="7" class="empty-row">No sales recorded yet</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="productModalTitle">Add Product</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="productForm">
+                <div class="form-group">
+                    <label>Product Name *</label>
+                    <input type="text" id="productName" required placeholder="e.g., Laptop">
+                </div>
+                <div class="form-group">
+                    <label>Price ($) *</label>
+                    <input type="number" id="productPrice" step="0.01" min="0" required placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label>Stock Quantity</label>
+                    <input type="number" id="productStock" min="0" value="100" placeholder="Initial stock">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cancel-modal-btn">Cancel</button>
+                    <button type="submit" class="confirm-btn">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
